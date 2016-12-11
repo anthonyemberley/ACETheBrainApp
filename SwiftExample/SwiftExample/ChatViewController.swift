@@ -15,13 +15,32 @@ class ChatViewController: JSQMessagesViewController {
     var conversation: Conversation?
     var incomingBubble: JSQMessagesBubbleImage!
     var outgoingBubble: JSQMessagesBubbleImage!
+    var lastCharacterTypedTimestamp: NSDate!
+    var numPauses: Int = 0
+    var numErrors: Int = 0
+    var timeTextStarted: NSDate!
+    var didAskQuestion: Bool = false
+    var questionsAsked: [String] = []
+    let AIDisplayName: String = "AI Steve"
+    let kFinishedAskingQuestionsString = "Thank you, that is all the questions for today"
+    let kTalkToAthleticTrainerString = "Response seems different, consider seeing an Athletic Trainer"
+    
+    
+    private let kPauseSecondsAllowed : Double = 3.0
+    
     fileprivate var displayName: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.inputToolbar.contentView?.textView?.delegate = self
+        
         // Setup navigation
         setupBackButton()
+        
+        
+        //Get the first question from the server
+        getNextQuestion()
         
         /**
          *  Override point:
@@ -64,6 +83,28 @@ class ChatViewController: JSQMessagesViewController {
 
         self.collectionView?.reloadData()
         self.collectionView?.layoutIfNeeded()
+    }
+    
+    
+    func getNextQuestion(){
+        ServerRequest.shared.postNewQuestion(questions_asked: questionsAsked, success: { (json) -> Void in
+            let question = json["question"]
+            self.questionsAsked.append(question.stringValue)
+            let newMessage = JSQMessage(senderId: AvatarIdJobs, displayName: self.AIDisplayName, text: question.stringValue)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                // Put your code which should be executed with a delay here
+                self.messages.append(newMessage)
+                self.finishReceivingMessage(animated: true)
+                self.scrollToBottom(animated: true)
+                self.didAskQuestion = question.stringValue != self.kFinishedAskingQuestionsString
+
+            })
+            
+            
+        },failure: { (errorMessage) -> Void in
+            print(errorMessage)
+        })
     }
     
     func setupBackButton() {
@@ -219,6 +260,9 @@ class ChatViewController: JSQMessagesViewController {
         }
     }
     
+    
+    
+    
     // MARK: JSQMessagesViewController method overrides
     override func didPressSend(_ button: UIButton, withMessageText text: String, senderId: String, senderDisplayName: String, date: Date) {
         /**
@@ -229,9 +273,51 @@ class ChatViewController: JSQMessagesViewController {
          *  3. Call `finishSendingMessage`
          */
         
+        
+        
+        //methods already here
+        
         let message = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
         self.messages.append(message)
         self.finishSendingMessage(animated: true)
+        self.inputToolbar.contentView?.textView?.resignFirstResponder()
+        
+        //api stuff
+        
+        if didAskQuestion {
+            let now = NSDate()
+            let responseTime: Double = now.timeIntervalSince(timeTextStarted as Date)
+            ServerRequest.shared.sendNewQuestionResponse(user_id: 1, question: self.questionsAsked.last!, response: (self.inputToolbar.contentView?.textView?.text)!, response_time: Int(responseTime), errors: numErrors, pauses: numPauses, success: { (json) -> Void in
+                let responseString = json["response"].stringValue
+                if responseString == self.kTalkToAthleticTrainerString{
+                    let newMessage = JSQMessage(senderId: AvatarIdJobs, displayName: self.AIDisplayName, text: responseString)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        // Put your code which should be executed with a delay here
+                        self.messages.append(newMessage)
+                        self.finishReceivingMessage(animated: true)
+                        self.scrollToBottom(animated: true)
+                    })
+                    
+                }
+            },failure: { (errorMessage) -> Void in
+                print(errorMessage)
+            })
+            
+        }
+        
+        //reset numbers
+        //didSendQuestion = false
+        numErrors = 0
+        numPauses = 0
+        timeTextStarted = nil
+        lastCharacterTypedTimestamp = nil
+        didAskQuestion = false
+        
+        getNextQuestion()
+        
+        
+        
+
     }
     
     override func didPressAccessoryButton(_ sender: UIButton) {
@@ -404,6 +490,59 @@ class ChatViewController: JSQMessagesViewController {
         
         return 0.0
     }
+    
+    //MARK: text view delegate methods
+    
+    override func textViewDidBeginEditing(_ textView: UITextView) {
+        if (textView != self.inputToolbar.contentView?.textView) {
+            return
+        }
+        
+        
+        textView.becomeFirstResponder()
+        
+        if (self.automaticallyScrollsToMostRecentMessage) {
+            self.scrollToBottom(animated: true)
+        }    }
+    
+    override func textViewDidChange(_ textView: UITextView) {
+        if (textView != self.inputToolbar.contentView?.textView) {
+            return;
+        }
+        
+        //start time to track total time it takes to respond
+        if timeTextStarted == nil {
+            timeTextStarted = NSDate()
+        }
+        
+        //Calculating if the user paused during responding
+        if let lastDate = lastCharacterTypedTimestamp{
+            let now = NSDate()
+            
+            let timeInterval: Double = now.timeIntervalSince(lastDate as Date)
+            if timeInterval > kPauseSecondsAllowed {
+                numPauses += 1
+            }
+        }
+        lastCharacterTypedTimestamp = NSDate()
+        
+    }
+    
+    override func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let  char = text.cString(using: String.Encoding.utf8)!
+        let isBackSpace = strcmp(char, "\\b")
+        
+        if (isBackSpace == -92) {
+            //backspace pressed 
+            numErrors += 1
+            
+        }
+        
+        
+        return true
+        
+    }
+    
 
     override func collectionView(_ collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForMessageBubbleTopLabelAt indexPath: IndexPath) -> CGFloat {
         

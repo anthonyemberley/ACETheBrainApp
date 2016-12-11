@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "5C196A63E58375A3EDB65ED4F16982057CB84502",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "90530B99EB0008E7A50951FDFBE02169118FA649" : 9223372036854775807,
+    "5C196A63E58375A3EDB65ED4F16982057CB84502" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9AAB5F3B-90AC-49C0-8D9E-EBE76E286326",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "90530B99EB0008E7A50951FDFBE02169118FA649" : "",
+    "5C196A63E58375A3EDB65ED4F16982057CB84502" : "SwiftExample\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SwiftExample",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SwiftExample.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/anthonyemberley\/ACETheBrainApp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5C196A63E58375A3EDB65ED4F16982057CB84502"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jessesquires\/JSQMessagesViewController.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "90530B99EB0008E7A50951FDFBE02169118FA649"
+    }
+  ]
+}

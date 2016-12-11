@@ -181,6 +181,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     [self jsq_updateCollectionViewInsets];
 }
 
+
 - (void)dealloc
 {
     [self jsq_registerForNotifications:NO];

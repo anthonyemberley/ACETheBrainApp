@@ -14,6 +14,8 @@
 		41AF84E51CFCFE17006ED473 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41AF84E41CFCFE17006ED473 /* Images.xcassets */; };
 		872F10EC240969CC9051FF5B /* Pods_SwiftExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4403B1A26FE3CFF614F3F725 /* Pods_SwiftExampleTests.framework */; };
 		A0844FA11D38367C00D0EB83 /* jsq_messages_sample.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A0844FA01D38367C00D0EB83 /* jsq_messages_sample.m4a */; };
+		B86A8A661DF12CFE00745D90 /* ServerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86A8A651DF12CFE00745D90 /* ServerRequest.swift */; };
+		B86A8A681DF138DC00745D90 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86A8A671DF138DC00745D90 /* UserAPI.swift */; };
 		F80276D11CE38FA600063D88 /* DemoConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80276D01CE38FA600063D88 /* DemoConversation.swift */; };
 		F80276D31CE38FEB00063D88 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80276D21CE38FEB00063D88 /* Conversation.swift */; };
 		F80276D51CE3915700063D88 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80276D41CE3915700063D88 /* ChatViewController.swift */; };
@@ -45,6 +47,8 @@
 		74B7033A0AA00050D9200C2B /* Pods-SwiftExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftExampleTests/Pods-SwiftExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		8F35C314AF75B616FAD01E7A /* Pods-SwiftExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftExample/Pods-SwiftExample.release.xcconfig"; sourceTree = "<group>"; };
 		A0844FA01D38367C00D0EB83 /* jsq_messages_sample.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = jsq_messages_sample.m4a; path = ../../JSQMessagesDemo/jsq_messages_sample.m4a; sourceTree = "<group>"; };
+		B86A8A651DF12CFE00745D90 /* ServerRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerRequest.swift; sourceTree = "<group>"; };
+		B86A8A671DF138DC00745D90 /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		F80276D01CE38FA600063D88 /* DemoConversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoConversation.swift; sourceTree = "<group>"; };
 		F80276D21CE38FEB00063D88 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		F80276D41CE3915700063D88 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 		F82D09C11CDFBB4900DD74CF /* SwiftExample */ = {
 			isa = PBXGroup;
 			children = (
+				B86A8A651DF12CFE00745D90 /* ServerRequest.swift */,
+				B86A8A671DF138DC00745D90 /* UserAPI.swift */,
 				F82D09C21CDFBB4900DD74CF /* AppDelegate.swift */,
 				F80276D01CE38FA600063D88 /* DemoConversation.swift */,
 				F80276D41CE3915700063D88 /* ChatViewController.swift */,
@@ -351,7 +357,9 @@
 			files = (
 				F80276D31CE38FEB00063D88 /* Conversation.swift in Sources */,
 				F80276D11CE38FA600063D88 /* DemoConversation.swift in Sources */,
+				B86A8A661DF12CFE00745D90 /* ServerRequest.swift in Sources */,
 				F80276D51CE3915700063D88 /* ChatViewController.swift in Sources */,
+				B86A8A681DF138DC00745D90 /* UserAPI.swift in Sources */,
 				F82D09C31CDFBB4900DD74CF /* AppDelegate.swift in Sources */,
 				F82E19211CF0F2BE0069B211 /* SettingsTableViewController.swift in Sources */,
 				371B88351D42DE7000CC7271 /* InitalTableViewController.swift in Sources */,

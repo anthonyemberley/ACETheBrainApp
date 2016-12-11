@@ -4,6 +4,8 @@
  use_frameworks!
 
 target 'SwiftExample' do
+pod 'Alamofire', '~> 4.0'
+pod 'SwiftyJSON', '~> 3.0'
 pod 'JSQMessagesViewController', :path => '../'
 
 end
