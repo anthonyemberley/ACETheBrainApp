@@ -1,5 +1,7 @@
 Note: this repository is forked from https://github.com/jessesquires/JSQMessagesViewController in order to use the messaging feature, but main purpose is for an artificial intelligence chatbot communicating with the backend server from this repository: https://github.com/anthonyemberley/ACETheBrainAPI
 
+Note: the part I actually built is found in the folder SwiftExample, specifically the ServerRequest.swift and ChatViewController.swift files
+
 ## Purpose
 ACE The Brain is a mobile application aimed at helping diagnose concussions through a passive application.  Most concussion tests are very active in nature and typically conducted by an athletic trainer or an online test. ACE The Brain is a artificially intelligent chat bot that communicates with the user on a daily basis and builds a model for how they typically communicate.  If the system notices major differences in communication style aligned with those who exhibit concussions, it notifies the athlete's athletic trainer.  The reason we created this system is for athletes that avoid athletic trainers when sustaining head injuries for fear of losing playing time.
 
