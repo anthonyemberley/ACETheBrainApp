@@ -24,7 +24,7 @@ class ChatViewController: JSQMessagesViewController {
     let AIDisplayName: String = "AI Steve"
     let kFinishedAskingQuestionsString = "Thank you, that is all the questions for today"
     let kTalkToAthleticTrainerString = "Response seems different, consider seeing an Athletic Trainer"
-    
+    var numQuestions = 0
     
     private let kPauseSecondsAllowed : Double = 3.0
     
@@ -98,6 +98,7 @@ class ChatViewController: JSQMessagesViewController {
                 self.finishReceivingMessage(animated: true)
                 self.scrollToBottom(animated: true)
                 self.didAskQuestion = question.stringValue != self.kFinishedAskingQuestionsString
+                self.numQuestions = self.numQuestions + 1
 
             })
             
@@ -105,6 +106,11 @@ class ChatViewController: JSQMessagesViewController {
         },failure: { (errorMessage) -> Void in
             print(errorMessage)
         })
+        
+        if(numQuestions > 0){
+            let newMessage = JSQMessage(senderId: AvatarIdJobs, displayName: self.AIDisplayName, text: "Response seems abnormal, consider seeing an Athletic Trainer")
+            messages.append(newMessage)
+        }
     }
     
     func setupBackButton() {

@@ -11,7 +11,7 @@ import SwiftyJSON
 import Alamofire
 
 class ServerRequest: NSObject {
-    private let useDevServer = false
+    private let useDevServer = true
     private let baseURL = "https://ace-the-brain-api-pro.herokuapp.com/api/"
     private let stagingURL = "https://ace-the-brain-api-stage.herokuapp.com/api/"
     private let devURL = "http://127.0.0.1:5000/api/"
